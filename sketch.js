@@ -11,7 +11,7 @@ function setup() {
 	var threeSceneReference = document.querySelector('a-scene').object3D;
 
 	loader = new THREE.MOLLoader();
-	loader.load("models/Isoliquiritigenin.mol", (model) => {
+	loader.load("models/molecule.mol", (model) => {
 		threeSceneReference.add(model);
 	});
 }
