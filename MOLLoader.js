@@ -271,42 +271,40 @@ function generateGeometry(geometryAtoms, geometryBonds, bondOrder, json) {
 		var g = new THREE.Group();
 
 		for (var j = 1; j <= numberOfBonds; j++) {
-			var newBond = new THREE.Group(); //this will be ONE bond (eg a double bond will have 2 of these groups) that gets added to the group of all bonds
 
-			color.r = colors.getX(json.bonds[i/2][0]); //use the references in the bond json data to find the color of the atom the bond is connected to
-			color.g = colors.getY(json.bonds[i/2][0]);
-			color.b = colors.getZ(json.bonds[i/2][0]);
+			color.r = colors.getX(json.bonds[i / 2][0]); //use the references in the bond json data to find the color of the atom the bond is connected to
+			color.g = colors.getY(json.bonds[i / 2][0]);
+			color.b = colors.getZ(json.bonds[i / 2][0]);
 
 			var object1 = new THREE.Mesh(boxGeometry, new THREE.MeshPhongMaterial({
 				color: color
 			})); //object1 becomes one half of the bond, inheriting its color from the atom it's attached to at its end
-			
-			object1.position.copy(start);
-			object1.position.lerp(end,0.25);
-			object1.scale.set(5, 5, start.distanceTo(end)/2);
-			object1.lookAt(end);
-			newBond.add(object1);
 
-			color.r = colors.getX(json.bonds[i/2][1]);
-			color.g = colors.getY(json.bonds[i/2][1]);
-			color.b = colors.getZ(json.bonds[i/2][1]);
+			object1.position.copy(start);
+			object1.position.lerp(end, 0.25);
+			object1.scale.set(5, 5, start.distanceTo(end) / 2);
+			object1.lookAt(end);
+			g.add(object1);
+
+			color.r = colors.getX(json.bonds[i / 2][1]);
+			color.g = colors.getY(json.bonds[i / 2][1]);
+			color.b = colors.getZ(json.bonds[i / 2][1]);
 
 			var object2 = new THREE.Mesh(boxGeometry, new THREE.MeshPhongMaterial({
 				color: color
 			})); //object2 becomes the other half of the bond, inheriting its color  respectively from the atom it's attached to at its end
-			
+
 			object2.position.copy(start);
 			object2.position.lerp(end, 0.75);
 			object2.scale.set(5, 5, start.distanceTo(end) / 2);
 			object2.lookAt(end);
-			newBond.add(object2);
-			
+			g.add(object2);
+
 			//translate the bond along its axis to create n>1 order bonds
-			//newBond.translateOnAxis(new THREE.Vector3(0, 1, 0), 8*(j * 2 - numberOfBonds - 1));
-			newBond.translateX(8 * (j * 2 - numberOfBonds - 1));
-			//add the SINGLE bond to the g group
-			g.add(newBond);
+			object1.translateX(8 * (j * 2 - numberOfBonds - 1));
+			object2.translateX(8 * (j * 2 - numberOfBonds - 1));
 		}
+
 		//add the collective bonds (eg if it is an order 2 bond, it will contain 2 "newBond" groups, each one representing one bond) to the actual root
 		root.add(g);
 	}
