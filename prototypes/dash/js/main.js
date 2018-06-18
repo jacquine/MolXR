@@ -87,4 +87,57 @@ $(document).ready(function() {
 		}
 	});
 
+	var fileContents;
+
+	// When file is uploaded, check for the file type
+	$("#molUpload").change( () => {
+		var uploadFile = document.getElementById("molUpload").files[0];
+		// check if the file is a .mol
+		if (uploadFile.name.substring(uploadFile.name.length - 4) == ".mol") {
+			$("#molUploadLabel").html(uploadFile.name); // hange the file uploader to include the file name
+			document.getElementById("molUploadButton").disabled = false; // take the "disabled" property off of the upload button
+			$(".modal-body small").hide();
+
+			var reader = new FileReader();
+			reader.readAsText(uploadFile, "UTF-8");
+
+			reader.onload = function (event) {
+				//console.log(event.target.result);
+				fileContents = event.target.result;
+			}
+		} else {
+			$(".modal-body small").show();
+			$("#molUploadLabel").html("Choose a .mol file");
+			document.getElementById("molUpload").value = null; // clear the field
+			document.getElementById("molUploadButton").disabled = true; // make sure the file cannot be uploaded
+		}
+	});
+
+	// handle upload button click
+	$("#molUploadButton").click( () => {
+		var uploadFile = document.getElementById("molUpload").files[0];
+
+		var molecule = {
+			name: uploadFile.name,
+			data: fileContents
+		};
+		//console.log(fileContents);
+		
+		if (user_info) {
+			// upload the data
+			var newKey = database.ref().child('molecules').push().key;
+
+			var update = {};
+			update["users/"+user_info.uid+"/molecules/"+newKey] = molecule;
+			database.ref().update(update);
+			console.log("success!");
+
+			// clear the modal input field
+			document.getElementById("molUpload").value = null; // clear the field
+			document.getElementById("molUploadButton").disabled = true; // make sure the file cannot be uploaded
+			$("#molUploadLabel").html("Choose a .mol file");
+			$('#upload-modal').modal('toggle') // toggle the modal to close
+		}
+
+	});
 });
