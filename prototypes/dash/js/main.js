@@ -12,10 +12,38 @@ $(document).ready(function() {
 
 	// initialize database & storage references
 	var database = firebase.database();
+	var updates;
 	var storage = firebase.storage();
 	var storageRef = storage.ref();
 
 	var user_info = false;
+
+	var printTable = function(data) {
+		//check if the data is not null
+		if (data != null) {
+			// remove the current table
+			$("#page-table").empty();
+			// add a BS table to the div
+			$("#page-table").append('<table class="table"></table>');
+			// add the header to the table
+			$("#page-table table").append('<thead class="thead-light"></thead>');
+			// add the header cells
+			$("#page-table table thead").append('<th scope="col">Molecule</th>');
+			$("#page-table table thead").append('<th scope="col" class="text-right">Options</th>');
+			// add the body to the table
+			$("#page-table table").append('<tbody></tbody>')
+			for (var key in data.molecules) {
+				// each molecule has its own row in the table, with a unique ID (just in case) for targeting purposes
+				$("#page-table table tbody").append(`<tr id="${key}"></tr>`);
+				// add the name of the molecule as the primary part of the table
+				$(`#page-table table tbody #${key}`).append(`<th scope="row">${data.molecules[key].name}</th>`);
+				// everything else, which gets added to the right side of the table, will need to be functional
+				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}</th>`);
+				console.log(key);
+				console.log(data.molecules[key].name);
+			}
+		}
+	};
 
 	// handle signin by adding click function to the button
 	$("button#signin").click( (event) => {
@@ -62,6 +90,13 @@ $(document).ready(function() {
 	firebase.auth().onAuthStateChanged( (user) => {
 		if (user) {
 			user_info = user;
+
+			// this chunk of code checks for updates
+			updates = firebase.database().ref("/users/"+user_info.uid);
+			updates.on("value", (snapshot) => {
+				var data = snapshot.val()
+				printTable(data);
+			});
 
 			console.log("signed in");
 			// console.log("user:");
@@ -130,7 +165,7 @@ $(document).ready(function() {
 			var update = {};
 			update["users/"+user_info.uid+"/molecules/"+newKey] = molecule;
 			database.ref().update(update);
-			console.log("success!");
+			console.log("upload success");
 
 			// clear the modal input field
 			document.getElementById("molUpload").value = null; // clear the field
