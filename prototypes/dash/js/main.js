@@ -40,16 +40,19 @@ $(document).ready(function() {
 				// everything else, which gets added to the right side of the table, will need to be functional
 
 				// first we add the delete button, and give it an onClick function
-				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}<a class="mx-2" id="delete-${key}"><i class = "far fa-trash-alt"></a></td>`);
-				$(`#page-table table tbody #${key} #delete-${key}`).click(()=>{deleteMolecule(key)});
+				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}<a class="mx-2" id="delete-${key}"><i class = "far fa-trash-alt" id="${key}"></a></td>`);
+				$(`#page-table table tbody #${key} #delete-${key} i`).click((event) => {deleteMolecule(event.target.id)});
 			}
+		} else {
+			$("#page-table").empty();
 		}
 	};
 
 	// eventually, this function will delete the molecule from the database
 	var deleteMolecule = function(key) {
 		// for now, I'm just trying to make sure it gets passed the correct key
-		console.log(key);
+		database.ref(`/users/${user_info.uid}/molecules/${key}`).remove();
+		console.log(`Removed ${key}`);
 	}
 
 	// handle signin by adding click function to the button
