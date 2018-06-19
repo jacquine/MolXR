@@ -38,12 +38,19 @@ $(document).ready(function() {
 				// add the name of the molecule as the primary part of the table
 				$(`#page-table table tbody #${key}`).append(`<th scope="row">${data.molecules[key].name}</th>`);
 				// everything else, which gets added to the right side of the table, will need to be functional
-				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}</th>`);
-				console.log(key);
-				console.log(data.molecules[key].name);
+
+				// first we add the delete button, and give it an onClick function
+				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}<a class="mx-2" id="delete-${key}"><i class = "far fa-trash-alt"></a></td>`);
+				$(`#page-table table tbody #${key} #delete-${key}`).click(()=>{deleteMolecule(key)});
 			}
 		}
 	};
+
+	// eventually, this function will delete the molecule from the database
+	var deleteMolecule = function(key) {
+		// for now, I'm just trying to make sure it gets passed the correct key
+		console.log(key);
+	}
 
 	// handle signin by adding click function to the button
 	$("button#signin").click( (event) => {
@@ -81,6 +88,7 @@ $(document).ready(function() {
 		firebase.auth().signOut().then( () => {
 			// clear user info
 			user_info = false;
+			updates = null;
 		}).catch(function (error) {
 			// An error happened.
 		});
@@ -111,6 +119,8 @@ $(document).ready(function() {
 			$("#user_name").html(user_info.displayName);
 		} else {
 			user_info = false;
+			updates = null;
+			$("#page-table").empty();
 
 			// show & hide the relevant information
 			$("button#signin").show();
