@@ -34,14 +34,24 @@ $(document).ready(function() {
 			$("#page-table table").append('<tbody></tbody>')
 			for (var key in data.molecules) {
 				// each molecule has its own row in the table, with a unique ID (just in case) for targeting purposes
-				$("#page-table table tbody").append(`<tr id="${key}"></tr>`);
+				$("#page-table table tbody").append(`<tr id="${key}" class="mol-row"></tr>`);
+				$(`#${key}`).data("key",key);
+				
 				// add the name of the molecule as the primary part of the table
 				$(`#page-table table tbody #${key}`).append(`<th scope="row">${data.molecules[key].name}</th>`);
 				// everything else, which gets added to the right side of the table, will need to be functional
 
 				// first we add the delete button, and give it an onClick function
-				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}<a class="mx-2" id="delete-${key}"><i class = "far fa-trash-alt" id="${key}"></a></td>`);
-				$(`#page-table table tbody #${key} #delete-${key} i`).click((event) => {deleteMolecule(event.target.id)});
+				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}</td>`);
+				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-edit"><i class="far fa-edit"></i></a>`);
+				
+				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
+
+				$(`#page-table #${key} .mol-delete`).click(() => {
+					console.dir(event.target.id);
+					$(this).hide();
+					//deleteMolecule();
+				});
 			}
 		} else {
 			$("#page-table").empty();
@@ -51,7 +61,7 @@ $(document).ready(function() {
 	// eventually, this function will delete the molecule from the database
 	var deleteMolecule = function(key) {
 		// for now, I'm just trying to make sure it gets passed the correct key
-		database.ref(`/users/${user_info.uid}/molecules/${key}`).remove();
+		//database.ref(`/users/${user_info.uid}/molecules/${key}`).remove();
 		console.log(`Removed ${key}`);
 	}
 
