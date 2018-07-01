@@ -41,17 +41,14 @@ $(document).ready(function() {
 				$(`#page-table table tbody #${key}`).append(`<th scope="row">${data.molecules[key].name}</th>`);
 				// everything else, which gets added to the right side of the table, will need to be functional
 
-				// first we add the delete button, and give it an onClick function
+				// write the key (temporary)
 				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}</td>`);
+				//add edit button
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-edit"><i class="far fa-edit"></i></a>`);
-				
+				// add delete button
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
-
-				$(`#page-table #${key} .mol-delete`).click(() => {
-					console.dir(event.target.id);
-					$(this).hide();
-					//deleteMolecule();
-				});
+				// add click function to the delete button
+				$(`#page-table #${key} .mol-delete`).click(deleteMolecule);
 			}
 		} else {
 			$("#page-table").empty();
@@ -59,9 +56,12 @@ $(document).ready(function() {
 	};
 
 	// eventually, this function will delete the molecule from the database
-	var deleteMolecule = function(key) {
-		// for now, I'm just trying to make sure it gets passed the correct key
-		//database.ref(`/users/${user_info.uid}/molecules/${key}`).remove();
+	var deleteMolecule = function(event) {
+		event.preventDefault();
+		var key = $(this).parent().parent().data("key")
+		
+		//console.log(key);
+		database.ref(`/users/${user_info.uid}/molecules/${key}`).remove();
 		console.log(`Removed ${key}`);
 	}
 
