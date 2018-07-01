@@ -49,13 +49,43 @@ $(document).ready(function() {
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
 				// add click function to the delete button
 				$(`#page-table #${key} .mol-delete`).click(deleteMolecule);
+				$(`#page-table #${key} .mol-edit`).click(renameMolecule);
 			}
 		} else {
 			$("#page-table").empty();
 		}
 	};
 
-	// eventually, this function will delete the molecule from the database
+	// this function fires when the "edit" button is clicked in each row
+	var renameMolecule = function(event) {
+		event.preventDefault();
+
+		// get the key and molecule name
+		var key = $(this).parent().parent().data("key");
+		name = $(`tbody #${key} th`).html();
+
+		// set the modal's input to default to the name of the current molecule
+		$("#renameInput").val(name);
+
+		// handles changes in the input, to prevent it from being empty
+		// I do this by enabling/disabling the rename button
+		$("#renameInput").bind("input", () => {
+			if ($("#renameInput").val()) {
+				document.getElementById("molRenameButton").disabled = false;
+			} else {
+				document.getElementById("molRenameButton").disabled = true;
+			}
+		});
+
+		$("#molRenameButton").click(() => {
+			database.ref(`users/${user_info.uid}/molecules/${key}`).child("name").set($("#renameInput").val());
+			$("#rename-modal").modal("hide");
+		});
+
+		$("#rename-modal").modal("show");
+	}
+
+	// this function deletes the molecule from the database
 	var deleteMolecule = function(event) {
 		event.preventDefault();
 		var key = $(this).parent().parent().data("key")
@@ -186,7 +216,7 @@ $(document).ready(function() {
 			var newKey = database.ref().child('molecules').push().key;
 
 			var update = {};
-			update["users/"+user_info.uid+"/molecules/"+newKey] = molecule;
+			update[`users/${user_info.uid}/molecules/${newKey}`] = molecule;
 			database.ref().update(update);
 			console.log("upload success");
 
@@ -194,7 +224,7 @@ $(document).ready(function() {
 			document.getElementById("molUpload").value = null; // clear the field
 			document.getElementById("molUploadButton").disabled = true; // make sure the file cannot be uploaded
 			$("#molUploadLabel").html("Choose a .mol file");
-			$('#upload-modal').modal('toggle') // toggle the modal to close
+			$('#upload-modal').modal('hide') // toggle the modal to close
 		}
 
 	});
