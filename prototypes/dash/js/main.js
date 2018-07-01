@@ -206,7 +206,7 @@ $(document).ready(function() {
 		var uploadFile = document.getElementById("molUpload").files[0];
 
 		var molecule = {
-			name: uploadFile.name,
+			name: uploadFile.name.substr(0,uploadFile.name.length-4),
 			data: fileContents
 		};
 		//console.log(fileContents);
