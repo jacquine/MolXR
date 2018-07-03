@@ -163,10 +163,6 @@ $(document).ready(function() {
 			$("#page-main").show();
 
 			$("#user_name").html(user_info.displayName);
-
-			database.ref().child("users").orderByKey().equalTo("-LGMR-jFxe07ydWXXJuQ").on("value", (snapshot) => {
-				console.dir(snapshot.val());
-			})
 		} else {
 			user_info = false;
 			updates = null;
