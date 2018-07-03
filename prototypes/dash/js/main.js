@@ -13,8 +13,6 @@ $(document).ready(function() {
 	// initialize database & storage references
 	var database = firebase.database();
 	var updates;
-	var storage = firebase.storage();
-	var storageRef = storage.ref();
 
 	var user_info = false;
 
@@ -38,16 +36,21 @@ $(document).ready(function() {
 				$(`#${key}`).data("key",key);
 				
 				// add the name of the molecule as the primary part of the table
-				$(`#page-table table tbody #${key}`).append(`<th scope="row">${data.molecules[key].name}</th>`);
+				$(`#page-table table tbody #${key}`).append(`<th scope="row" class="align-middle">${data.molecules[key].name}</th>`);
 				// everything else, which gets added to the right side of the table, will need to be functional
 
 				// write the key (temporary)
-				$(`#page-table table tbody #${key}`).append(`<td class="text-right">${key}</td>`);
+				$(`#page-table table tbody #${key}`).append(`<td class="text-right"></td>`);
 				//add edit button
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-edit"><i class="far fa-edit"></i></a>`);
 				// add delete button
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
-				// add click function to the delete button
+
+				// add link to view in VR
+				// NOTE: this will change to view in AR as well, likely as a button dropdown menu
+				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="vr/index.html?uid=${user_info.uid}&mol=${key}" role="button">VR</a>`);
+
+				// add click function to the delete button and rename button
 				$(`#page-table #${key} .mol-delete`).click(deleteMolecule);
 				$(`#page-table #${key} .mol-edit`).click(renameMolecule);
 			}
@@ -160,6 +163,10 @@ $(document).ready(function() {
 			$("#page-main").show();
 
 			$("#user_name").html(user_info.displayName);
+
+			database.ref().child("users").orderByKey().equalTo("-LGMR-jFxe07ydWXXJuQ").on("value", (snapshot) => {
+				console.dir(snapshot.val());
+			})
 		} else {
 			user_info = false;
 			updates = null;
