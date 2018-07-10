@@ -47,8 +47,7 @@ $(document).ready(function() {
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
 
 				// add link to view in VR
-				// NOTE: this will change to view in AR as well, likely as a button dropdown menu
-				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="vr/index.html?uid=${user_info.uid}&mol=${key}" role="button">VR</a>`);
+				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="vr/index.html?mol=${key}" role="button">VR</a>`);
 
 				// add click function to the delete button and rename button
 				$(`#page-table #${key} .mol-delete`).click(deleteMolecule);
@@ -82,6 +81,7 @@ $(document).ready(function() {
 
 		$("#molRenameButton").click(() => {
 			database.ref(`users/${user_info.uid}/molecules/${key}`).child("name").set($("#renameInput").val());
+			database.ref(`molecules/${key}`).child("name").set($("#renameInput").val());
 			$("#rename-modal").modal("hide");
 		});
 
@@ -92,9 +92,18 @@ $(document).ready(function() {
 	var deleteMolecule = function(event) {
 		event.preventDefault();
 		var key = $(this).parent().parent().data("key")
+		var molecule = database.ref(`/users/${user_info.uid}/molecules`).child(key);
+
+		// use the snapshot value to "move" the molecule into the user's deleted folder
+		molecule.once("value", (snapshot) => {
+			database.ref(`users/${user_info.uid}/deleted/${snapshot.key}`).set(snapshot.val());
+		});
 		
-		//console.log(key);
-		database.ref(`/users/${user_info.uid}/molecules/${key}`).remove();
+		// console.log(key);
+		// delete the molecule from the user's active molecule folder
+		database.ref(`users/${user_info.uid}/molecules`).child(key).remove();
+		// mark the molecule as inactive
+		database.ref(`molecules/${key}`).child("active").set(false);
 		console.log(`Removed ${key}`);
 	}
 
@@ -209,19 +218,25 @@ $(document).ready(function() {
 		var uploadFile = document.getElementById("molUpload").files[0];
 
 		var molecule = {
-			name: uploadFile.name.substr(0,uploadFile.name.length-4),
-			data: fileContents
+			uploadName: uploadFile.name.substr(0,uploadFile.name.length-4),
+			name: uploadFile.name.substr(0, uploadFile.name.length - 4),
+			data: fileContents,
+			user: user_info.uid,
+			active: true
 		};
 		//console.log(fileContents);
 		
 		if (user_info) {
 			// upload the data
-			var newKey = database.ref().child('molecules').push().key;
+			var newKey = database.ref(`users/${user_info.uid}/molecules`).push().key;
 
 			var update = {};
-			update[`users/${user_info.uid}/molecules/${newKey}`] = molecule;
+			update[`molecules/${newKey}`] = molecule;
+			update[`users/${user_info.uid}/molecules/${newKey}`] = {name: molecule.uploadName};
 			database.ref().update(update);
 			console.log("upload success");
+
+
 
 			// clear the modal input field
 			document.getElementById("molUpload").value = null; // clear the field

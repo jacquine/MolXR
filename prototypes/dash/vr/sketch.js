@@ -51,8 +51,8 @@ $(document).ready(function() {
 		return vars;
 	}
 
-	console.log(`uid: ${$_GET("uid")}\nmolID: ${$_GET("mol")}`);
-	var data = database.ref(`users/${$_GET("uid")}/molecules/${$_GET("mol")}`).once("value", (snapshot) => {
+	console.log(`molID: ${$_GET("mol")}`);
+	var data = database.ref(`molecules/${$_GET("mol")}`).once("value", (snapshot) => {
 		var data = snapshot.child("data").val();
 
 		loader.load(data, (model) => {
