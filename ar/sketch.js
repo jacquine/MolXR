@@ -52,8 +52,10 @@ $(document).ready(function() {
 		var data = snapshot.child("data").val();
 
 		loader.load(data, (model) => {
-			model.scale.set(0.0014, 0.0014, 0.0014);
-			model.position.set(0, 0.4, 0);
+			// rescale and offset the model
+			model.scale.set(0.0018, 0.0018, 0.0018);
+			model.position.set(0, 0.6, 0);
+			// add to the marker
 			threeSceneReference.add(model);
 		});
 	});
