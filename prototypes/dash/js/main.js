@@ -46,6 +46,9 @@ $(document).ready(function() {
 				// add delete button
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
 
+				// add link to view in AR
+				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="ar/index.html?mol=${key}" role="button">AR</a>`);
+
 				// add link to view in VR
 				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="vr/index.html?mol=${key}" role="button">VR</a>`);
 
