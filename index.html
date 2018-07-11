@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+			crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+		 crossorigin="anonymous">
+
+		<title>MolXR</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand navbar-dark bg-dark py-3">
+			<div class="container">
+				<a class="navbar-brand" href="#">MolXR</a>
+
+				<button id="signin" class="btn btn-outline-light my-2 my-sm-0" type="submit">Sign In</button>
+				<button id="signout" class="btn btn-outline-light my-2 my-sm-0" style="display: none;" type="submit">Sign Out (<span id="user_name"></span>)</button>
+			</div>
+		</nav>
+
+		<div class="container pt-4">
+
+			<h1 class="display-3">MolXR<br></h1>
+			<h2><small class="text-muted">Molecular Visualization in Virtual & Augmented Reality</small></h2>
+			<hr>
+
+
+			<div id="page-welcome">
+				<p>Sign in using the button in the upper-right corner to begin!</p>
+				<p>You are <strong>not</strong> signed in!</p>
+			</div>
+
+			<div id="page-main" style="display: none;">
+				<p>Upload a molecule to get started!</p>
+				<button type="button" class="btn btn-outline-primary btn-large" data-target="#upload-modal" data-toggle="modal">Upload</button>
+
+				<hr>
+
+				<div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="uploadModalLabel">Upload Molecule</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="input-group mb-3">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="molUpload">
+										<label class="custom-file-label" for="molUpload" id="molUploadLabel">Choose a .mol file</label>
+									</div>
+								</div>
+								<small style="color: red; display: none;">Please upload a valid .mol file</small>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" id="molUploadButton" disabled>Upload</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="rename-modal" tabindex="-1" role="dialog" aria-labelledby="renameModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="renameModalLabel">Rename Molecule</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Molecule" id="renameInput" aria-label="Molecule">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" id="molRenameButton">Rename</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="page-table">
+					
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+			crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+			crossorigin="anonymous"></script>
+		<!-- FireBase Script -->
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+		<!-- My Custom JS -->
+		<script src="js/main.js"></script>
+	</body>
+
+	<style>
+		td .mol-edit, td .mol-delete {
+			color: #666;
+			transition: 0.5s;
+		}
+
+ 		td .mol-edit:hover, td .mol-delete:hover {
+			 color: #333;
+		}
+	</style>
+
+</html>

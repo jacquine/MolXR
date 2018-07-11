@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="UTF-8">
+
+		<!-- jQuery Slim (for Firebase functionality) -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+			crossorigin="anonymous"></script>
+
+		<!-- FireBase Script -->
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+
+		<!-- P5 ../libraries -->
+		<script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+
+		<!-- A-Frame ../libraries -->
+		<script language="javascript" type="text/javascript" src="../libraries/aframe.min.js"></script>
+		<script language="javascript" type="text/javascript" src="../libraries/aframe-ar.js"></script>
+
+		<!-- AFrameP5 library -->
+		<script language="javascript" type="text/javascript" src="../libraries/aframep5_ar.js"></script>
+
+		<!-- P5 Sketch -->
+		<script language="javascript" type="text/javascript" src="sketch.js"></script>
+		<script language="javascript" type="text/javascript" src="../MOLLoader.js"></script>
+
+		<!-- custom styles -->
+		<style>
+			body {
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- container to hold our VR scene - make sure to give this element an ID of 'VRScene' -->
+		<a-scene id="ARScene" embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono;'>
+
+	    	<!--
+		       The 'a-assets' container is used to load in any external artwork you may want to use as "textures" for your objects.
+		       Ensure that this element has an ID of 'VRAssets'
+
+		       Textures can be loaded by creating a new 'a-asset' tag inside of the 'a-assets' container.
+		       When doing this you will need to make sure to give your textures a unique ID -
+		       this will be used by p5 to create new objects.
+
+		       Example:
+
+		       <img id="ITEM_ID_GOES_HERE" src="images/gold_block.png">
+			-->
+
+			<a-assets id="VRAssets">
+
+			</a-assets>
+
+			<a-marker id="w-marker" preset="custom" url="markers/w_marker.pat"></a-marker>
+
+			<a-entity camera></a-entity>
+
+		</a-scene>
+
+	</body>
+</html>
