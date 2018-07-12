@@ -50,7 +50,7 @@ $(document).ready(function() {
 				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="ar/index.html?mol=${key}" role="button">AR</a>`);
 
 				// add link to view in VR
-				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="vr/index.html?mol=${key}" role="button">VR</a>`);
+				$(`#page-table table tbody #${key} td`).append(`<a class="ml-2 btn btn-outline-dark" href="vr/index.html?mol=${key}" role="button">VR</a>`);
 
 				// add click function to the delete button and rename button
 				$(`#page-table #${key} .mol-delete`).click(deleteMolecule);
