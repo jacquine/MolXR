@@ -61,13 +61,18 @@ $(document).ready(function() {
 		}
 	};
 
+	// deals with renaming glitch when hiding the modal
+	$('#rename-modal').on('hidden.bs.modal', () => {
+		$("#molRenameButton").off("click");
+	});
+
 	// this function fires when the "edit" button is clicked in each row
 	var renameMolecule = function(event) {
 		event.preventDefault();
 
 		// get the key and molecule name
 		var key = $(this).parent().parent().data("key");
-		name = $(`tbody #${key} th`).html();
+		var name = $(`tbody #${key} th`).html();
 
 		// set the modal's input to default to the name of the current molecule
 		$("#renameInput").val(name);
