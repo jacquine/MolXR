@@ -54,6 +54,7 @@ $(document).ready(function() {
 	console.log(`molID: ${$_GET("mol")}`);
 	var data = database.ref(`molecules/${$_GET("mol")}`).once("value", (snapshot) => {
 		var data = snapshot.child("data").val();
+		$("title").html(`VR - ${snapshot.child("name").val()}`);
 
 		loader.load(data, (model) => {
 			threeSceneReference.add(model);
