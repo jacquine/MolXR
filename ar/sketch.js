@@ -55,6 +55,7 @@ $(document).ready(function() {
 			// rescale and offset the model
 			model.scale.set(0.0018, 0.0018, 0.0018);
 			model.position.set(0, 0.6, 0);
+			model.rotation.set(3.14 / 2, 0, 0);
 			// add to the marker
 			threeSceneReference.add(model);
 		});
