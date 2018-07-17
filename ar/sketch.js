@@ -2,6 +2,8 @@ var loader;
 
 var threeSceneReference;
 
+var molecule;
+
 function setup() {
 
 	threeSceneReference = document.querySelector('a-marker').object3D;
@@ -10,10 +12,21 @@ function setup() {
 	// loader.load("models/molecule.mol", (model) => {
 	// 	threeSceneReference.add(model);
 	// });
+
+	var geo = new THREE.PlaneGeometry(1.25, 1.25, 1.25);
+	var mat = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide, opacity: 0.85});
+	var plane = new THREE.Mesh(geo, mat);
+	plane.rotateX(- Math.PI / 2);
+
+	threeSceneReference.add(plane);
 }
 
 function draw() {
-
+	if (molecule) {
+		// molecule.rotation.x += 0.002;
+		// molecule.rotation.y += 0.003;
+		molecule.rotation.z += 0.0035;
+	}
 }
 
 $(document).ready(function() {
@@ -53,12 +66,13 @@ $(document).ready(function() {
 		$("title").html(`AR - ${snapshot.child("name").val()}`);
 
 		loader.load(data, (model) => {
+			molecule = model;
 			// rescale and offset the model
-			model.scale.set(0.0018, 0.0018, 0.0018);
-			model.position.set(0, 0.6, 0);
-			model.rotation.set(3.14 / 2, 0, 0);
+			molecule.scale.set(0.0018, 0.0018, 0.0018);
+			molecule.position.set(0, 0.6, 0);
+			molecule.rotation.set(3.14 / 2, 0, 0);
 			// add to the marker
-			threeSceneReference.add(model);
+			threeSceneReference.add(molecule);
 		});
 	});
 });
