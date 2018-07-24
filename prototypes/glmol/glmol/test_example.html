@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<!--  
+   GLmol - Molecular Viewer on WebGL/Javascript 
+
+   (C) Copyright 2011, biochem_fan
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    This program uses
+      Three.js 
+         https://github.com/mrdoob/three.js
+         Copyright (c) 2010-2011 three.js Authors. All rights reserved.
+      jQuery
+         http://jquery.org/
+         Copyright (c) 2011 John Resig
+-->
+
+<html>
+<head>
+ <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+
+ <meta charset="utf-8">
+ 
+ <title>GLmol embedding examples</title>
+ <style type="text/css">
+ </style>
+</head>
+
+<body>
+<h1>GLmol embedding examples</h1>
+<p>You can embed multiple instances of GLmol in a page. Molecular representations can be customized by Javascript. For the details, please examine the source code of this page. If it is not clear, don't hesitate to ask me (biochem_fan at users.sourceforge.jp).</p>
+
+<p>Rotation: left button, Translation: middle button or Ctrl-key + left button, Zoom: Wheel or right button(up/down) or Shift-key + left button(up/down)</p>
+
+<h2>Embedding small molecule</h2>
+<p>The following molecule is triiodothyroxine. </p>
+
+<div id="glmol02" style="width: 300px; height: 200px; background-color: black;"></div> <textarea id="glmol02_src" style="display: none;">
+0.4700    2.5688    0.0006 O   0  0  0  0  0  0  0  0  0  0  0  0
+-3.1271   -0.4436   -0.0003 O   0  0  0  0  0  0  0  0  0  0  0  0
+-0.9686   -1.3125    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+2.2182    0.1412   -0.0003 N   0  0  0  0  0  0  0  0  0  0  0  0
+-1.3477    1.0797   -0.0001 N   0  0  0  0  0  0  0  0  0  0  0  0
+1.4119   -1.9372    0.0002 N   0  0  0  0  0  0  0  0  0  0  0  0
+0.8579    0.2592   -0.0008 C   0  0  0  0  0  0  0  0  0  0  0  0
+0.3897   -1.0264   -0.0004 C   0  0  0  0  0  0  0  0  0  0  0  0
+0.0307    1.4220   -0.0006 C   0  0  0  0  0  0  0  0  0  0  0  0
+-1.9061   -0.2495   -0.0004 C   0  0  0  0  0  0  0  0  0  0  0  0
+2.5032   -1.1998    0.0003 C   0  0  0  0  0  0  0  0  0  0  0  0
+-1.4276   -2.6960    0.0008 C   0  0  0  0  0  0  0  0  0  0  0  0
+3.1926    1.2061    0.0003 C   0  0  0  0  0  0  0  0  0  0  0  0
+-2.2969    2.1881    0.0007 C   0  0  0  0  0  0  0  0  0  0  0  0
+3.5163   -1.5787    0.0008 H   0  0  0  0  0  0  0  0  0  0  0  0
+-1.0451   -3.1973   -0.8937 H   0  0  0  0  0  0  0  0  0  0  0  0
+-2.5186   -2.7596    0.0011 H   0  0  0  0  0  0  0  0  0  0  0  0
+-1.0447   -3.1963    0.8957 H   0  0  0  0  0  0  0  0  0  0  0  0
+4.1992    0.7801    0.0002 H   0  0  0  0  0  0  0  0  0  0  0  0
+3.0468    1.8092   -0.8992 H   0  0  0  0  0  0  0  0  0  0  0  0
+3.0466    1.8083    0.9004 H   0  0  0  0  0  0  0  0  0  0  0  0
+-1.8087    3.1651   -0.0003 H   0  0  0  0  0  0  0  0  0  0  0  0
+-2.9322    2.1027    0.8881 H   0  0  0  0  0  0  0  0  0  0  0  0
+-2.9346    2.1021   -0.8849 H   0  0  0  0  0  0  0  0  0  0  0  0
+1  9  2  0  0  0  0
+2 10  2  0  0  0  0
+3  8  1  0  0  0  0
+3 10  1  0  0  0  0
+3 12  1  0  0  0  0
+4  7  1  0  0  0  0
+4 11  1  0  0  0  0
+4 13  1  0  0  0  0
+5  9  1  0  0  0  0
+5 10  1  0  0  0  0
+5 14  1  0  0  0  0
+6  8  1  0  0  0  0
+6 11  2  0  0  0  0
+7  8  2  0  0  0  0
+7  9  1  0  0  0  0
+11 15  1  0  0  0  0
+12 16  1  0  0  0  0
+12 17  1  0  0  0  0
+12 18  1  0  0  0  0
+13 19  1  0  0  0  0
+13 20  1  0  0  0  0
+13 21  1  0  0  0  0
+14 22  1  0  0  0  0
+14 23  1  0  0  0  0
+14 24  1  0  0  0  0
+M  END
+</textarea>
+
+<script src="js/jquery-1.7.min.js"></script>
+<script src="js/Three49custom.js"></script>
+<script type="text/javascript" src="js/GLmol.js"></script>
+<script type="text/javascript">
+
+// Small molecules can be embedded in the page
+
+var glmol02 = new GLmol('glmol02');
+
+</script>
+
+<hr style="clear: both;">
+<p><a href="http://sourceforge.jp/"><img src="http://sourceforge.jp/sflogo.php?group_id=6386&type=1" width="96" height="31" border="0" alt="SourceForge.JP"></a>
+<br>(C) Copyright 2011 biochem_fan (biochem_fan at users.sourceforge.jp). <br>
+This program is released under LGPL3.</p>
+</body></html>
