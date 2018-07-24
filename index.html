@@ -21,9 +21,13 @@
 		<nav class="navbar navbar-expand navbar-dark bg-dark py-3">
 			<div class="container">
 				<a class="navbar-brand" href="#">MolXR</a>
+				
+				<div>
+					<a href="dash" id="read-dash" class="btn btn-outline-light my-2 my-sm-0 mx-2" style="display: none">Dash</a>
 
-				<button id="signin" class="btn btn-outline-light my-2 my-sm-0" type="submit">Sign In</button>
-				<button id="signout" class="btn btn-outline-light my-2 my-sm-0" style="display: none;" type="submit">Sign Out (<span id="user_name"></span>)</button>
+					<button id="signin" class="btn btn-outline-light my-2 my-sm-0" type="submit">Sign In</button>
+					<button id="signout" class="btn btn-outline-light my-2 my-sm-0" style="display: none;" type="submit">Sign Out (<span id="user_name"></span>)</button>
+				</div>
 			</div>
 		</nav>
 
@@ -41,8 +45,6 @@
 			<div id="page-main" style="display: none;">
 				<p>Upload a molecule to get started!</p>
 				<button type="button" class="btn btn-outline-primary btn-large" data-target="#upload-modal" data-toggle="modal">Upload</button>
-
-				<p class="mt-3">To view a dashboard of your molecules, visit <a href="dash" id="read-dash">this link</a>.</p>
 
 				<p class="mt-3">To view a molecule in augmented reality, point your device's camera at <a href="ar/markers/w_marker.pdf" download>this marker</a>.</p>
 

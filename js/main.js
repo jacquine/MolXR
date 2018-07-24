@@ -183,6 +183,7 @@ $(document).ready(function() {
 
 			// update read-only dash info
 			$("#read-dash").attr("href",`dash?id=${user.uid}`);
+			$("#read-dash").show();
 		} else {
 			user_info = false;
 			updates = null;
@@ -196,6 +197,7 @@ $(document).ready(function() {
 
 			// update read-only dash info
 			$("#read-dash").attr("href", "dash");
+			$("#read-dash").hide();
 
 			console.log("signed out");
 		}
