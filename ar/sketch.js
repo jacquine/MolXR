@@ -14,7 +14,7 @@ function setup() {
 	// });
 
 	var geo = new THREE.PlaneGeometry(1.25, 1.25, 1.25);
-	var mat = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide, opacity: 0.85});
+	var mat = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide, opacity: 0.9});
 	var plane = new THREE.Mesh(geo, mat);
 	plane.rotateX(- Math.PI / 2);
 
