@@ -47,10 +47,10 @@ $(document).ready(function() {
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-delete" id="delete-${key}"><i class="far fa-trash-alt"></i></a>`);
 
 				// add link to view in AR
-				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="ar/index.html?mol=${key}" role="button">AR</a>`);
+				$(`#page-table table tbody #${key} td`).append(`<a class="mx-2 btn btn-outline-dark" href="ar?mol=${key}" role="button">AR</a>`);
 
 				// add link to view in VR
-				$(`#page-table table tbody #${key} td`).append(`<a class="ml-2 btn btn-outline-dark" href="vr/index.html?mol=${key}" role="button">VR</a>`);
+				$(`#page-table table tbody #${key} td`).append(`<a class="ml-2 btn btn-outline-dark" href="vr?mol=${key}" role="button">VR</a>`);
 
 				// add click function to the delete button and rename button
 				$(`#page-table #${key} .mol-delete`).click(deleteMolecule);
@@ -180,6 +180,9 @@ $(document).ready(function() {
 			$("#page-main").show();
 
 			$("#user_name").html(user_info.displayName);
+
+			// update read-only dash info
+			$("#read-dash").attr("href",`dash?id=${user.uid}`);
 		} else {
 			user_info = false;
 			updates = null;
@@ -190,6 +193,9 @@ $(document).ready(function() {
 			$("button#signout").hide();
 			$("#page-welcome").show();
 			$("#page-main").hide();
+
+			// update read-only dash info
+			$("#read-dash").attr("href", "dash");
 
 			console.log("signed out");
 		}
