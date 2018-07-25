@@ -178,6 +178,7 @@ $(document).ready(function() {
 			$("button#signout").show();
 			$("#page-welcome").hide();
 			$("#page-main").show();
+			$("#upload-toggle").show();
 
 			$("#user_name").html(user_info.displayName);
 
@@ -194,6 +195,7 @@ $(document).ready(function() {
 			$("button#signout").hide();
 			$("#page-welcome").show();
 			$("#page-main").hide();
+			$("#upload-toggle").hide();
 
 			// update read-only dash info
 			$("#read-dash").attr("href", "dash");
