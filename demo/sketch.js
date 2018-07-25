@@ -1,8 +1,8 @@
 var loader;
-var rotationSpeed = 0.00225;
+var rotationSpeed = 0.005;
 
 var oxycontinMarker;
-var caffeineMarker;
+var caffeineMarker = "Hello World";
 var hydrocortisoneMarker;
 
 var oxycontinMol;
