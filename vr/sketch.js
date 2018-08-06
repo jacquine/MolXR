@@ -1,11 +1,5 @@
-// var world;
-
-// var loader;
-
-// var threeSceneReference;
-
 var GLmolLoader;
-var molecule = null;
+var molecule;
 
 function setup() {
 	

@@ -77,7 +77,7 @@ GLmol.prototype.create = function(data, suppressAutoload) {
 //	 this.orthoscopicCamera.position.z = this.CAMERA_Z;
 //	 this.orthoscopicCamera.lookAt(new TV3(0, 0, 0));
 
-	var self = this;
+	/* var self = this;
 	$(window).resize(function() { // only window can capture resize event
 	  self.WIDTH = self.container.width() * self.aaScale;
 	  self.HEIGHT = self.container.height() * self.aaScale;
@@ -86,7 +86,7 @@ GLmol.prototype.create = function(data, suppressAutoload) {
 	  self.camera.aspect = self.ASPECT;
 	  self.camera.updateProjectionMatrix();
 	  self.show();
-	});
+	}); */
 
 	this.scene = null;
 	this.rotationGroup = null; // which contains modelGroup
@@ -1553,7 +1553,7 @@ GLmol.prototype.buildScene = function(sceneRef) {
 	this.defineRepresentation();
 	this.setView(view);
 
-	console.log("builded scene in " + (+new Date() - time) + "ms");
+	console.log("built scene in " + (+new Date() - time) + "ms");
 };
 
 GLmol.prototype.loadMolecule = function(repressZoom) {
