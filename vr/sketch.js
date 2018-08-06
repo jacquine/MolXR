@@ -1,21 +1,16 @@
-var world;
+// var world;
 
-var loader;
+// var loader;
 
-var threeSceneReference;
+// var threeSceneReference;
+
+var GLmolLoader;
+var molecule = null;
 
 function setup() {
 	
 	noCanvas();
 
-	world = new World('VRScene');
-
-	threeSceneReference = document.querySelector('a-scene').object3D;
-
-	loader = new THREE.MOLLoader();
-	// loader.load("models/molecule.mol", (model) => {
-	// 	threeSceneReference.add(model);
-	// });
 }
 
 function draw() {
@@ -56,8 +51,10 @@ $(document).ready(function() {
 		var data = snapshot.child("data").val();
 		$("title").html(`VR - ${snapshot.child("name").val()}`);
 
-		loader.load(data, (model) => {
-			threeSceneReference.add(model);
-		});
+		GLmolLoader = new GLmol(data);
+		GLmolLoader.buildScene("#VRScene");
+		molecule = GLmolLoader.rotationGroup;
+		molecule.position.z = -10;
+		molecule.position.y = 1;
 	});
 });
