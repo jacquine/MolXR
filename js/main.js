@@ -178,11 +178,13 @@ $(document).ready(function() {
 			$("button#signout").show();
 			$("#page-welcome").hide();
 			$("#page-main").show();
+			$("#upload-toggle").show();
 
 			$("#user_name").html(user_info.displayName);
 
 			// update read-only dash info
 			$("#read-dash").attr("href",`dash?id=${user.uid}`);
+			$("#read-dash").show();
 		} else {
 			user_info = false;
 			updates = null;
@@ -193,9 +195,11 @@ $(document).ready(function() {
 			$("button#signout").hide();
 			$("#page-welcome").show();
 			$("#page-main").hide();
+			$("#upload-toggle").hide();
 
 			// update read-only dash info
 			$("#read-dash").attr("href", "dash");
+			$("#read-dash").hide();
 
 			console.log("signed out");
 		}

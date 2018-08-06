@@ -1,0 +1,26 @@
+td .mol-edit,
+td .mol-delete {
+	color: #666;
+	transition: 0.5s;
+}
+
+td .mol-edit:hover,
+td .mol-delete:hover {
+	color: #333;
+}
+
+a {
+	transition: 0.5s;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+nav a {
+	color: #fff;
+}
+
+nav a:hover {
+	color: #ccc
+}
