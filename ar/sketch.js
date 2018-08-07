@@ -3,7 +3,7 @@ var GLmolLoader;
 var molecule;
 
 function setup() {
-
+	
 }
 
 function draw() {
@@ -51,10 +51,15 @@ $(document).ready(function() {
 		$("title").html(`AR - ${snapshot.child("name").val()}`);
 
 		GLmolLoader = new GLmol(data);
-		GLmolLoader.buildScene("a-marker");
+		renderScene("a-marker", "ball-stick");
+		
+	});
+
+	renderScene = function (target, rep) {
+		GLmolLoader.buildScene(target, rep);
 		threeSceneReference = GLmolLoader.scene;
 		molecule = GLmolLoader.rotationGroup;
-		molecule.scale.set(0.1,0.1,0.1);
+		molecule.scale.set(0.15, 0.15, 0.15);
 		molecule.position.set(0, 0.6, 0);
 		molecule.rotation.set(3.14 / 2, 0, 0);
 
@@ -68,5 +73,5 @@ $(document).ready(function() {
 		plane.rotateX(-Math.PI / 2);
 
 		threeSceneReference.add(plane);
-	});
+	}
 });

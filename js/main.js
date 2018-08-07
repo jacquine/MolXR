@@ -211,7 +211,7 @@ $(document).ready(function() {
 	$("#molUpload").change( () => {
 		var uploadFile = document.getElementById("molUpload").files[0];
 		// check if the file is a .mol
-		if (uploadFile.name.substring(uploadFile.name.length - 4) == ".mol") {
+		if (uploadFile.name.substring(uploadFile.name.length - 4) == ".mol" || uploadFile.name.substring(uploadFile.name.length - 4) == ".pdb") {
 			$("#molUploadLabel").html(uploadFile.name); // hange the file uploader to include the file name
 			document.getElementById("molUploadButton").disabled = false; // take the "disabled" property off of the upload button
 			$(".modal-body small").hide();

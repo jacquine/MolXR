@@ -1,5 +1,6 @@
 var GLmolLoader;
 var molecule;
+var data;
 
 function setup() {
 	
@@ -42,13 +43,17 @@ $(document).ready(function() {
 
 	console.log(`molID: ${$_GET("mol")}`);
 	var data = database.ref(`molecules/${$_GET("mol")}`).once("value", (snapshot) => {
-		var data = snapshot.child("data").val();
+		data = snapshot.child("data").val();
 		$("title").html(`VR - ${snapshot.child("name").val()}`);
 
 		GLmolLoader = new GLmol(data);
-		GLmolLoader.buildScene("#VRScene");
+		renderScene("#VRScene", "spheres");
+	});
+
+	renderScene = function(target, rep) {
+		GLmolLoader.buildScene(target, rep);
 		molecule = GLmolLoader.rotationGroup;
 		molecule.position.z = -10;
 		molecule.position.y = 1;
-	});
+	}
 });
