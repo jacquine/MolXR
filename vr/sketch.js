@@ -1,7 +1,7 @@
 var GLmolLoader;
 var molecule;
 var data;
-var rotationSpeed = 0.3;
+var rotationSpeed = 0.3; //this is the STARTING speed multiplier for the molecule
 
 function setup() {
 	
@@ -11,7 +11,7 @@ function setup() {
 
 function draw() {
 	if (molecule) {
-		molecule.rotation.y += (rotationSpeed*0.0085);
+		molecule.rotation.y += (rotationSpeed*0.0085); //multiply the speed rate by 0.0085, to prevent excessive spinning
 	}
 }
 
@@ -49,10 +49,12 @@ $(document).ready(function() {
 		data = snapshot.child("data").val();
 		$("title").html(`VR - ${snapshot.child("name").val()}`);
 
+		//GLmolLoader is our actual GLmol instance, created using the raw data from firebase
 		GLmolLoader = new GLmol(data);
-		renderScene("#VRScene", "ball-stick");
+		renderScene("#VRScene", "ball-stick"); //render the scene using ball & stick as the default view
 	});
 
+	//this is a method which can be called to re-build the scene. it changes the representation and then moves the "new" molecule into the correct position
 	renderScene = function(target, rep) {
 		GLmolLoader.buildScene(target, rep);
 		molecule = GLmolLoader.rotationGroup;

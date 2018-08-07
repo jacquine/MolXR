@@ -210,7 +210,9 @@ $(document).ready(function() {
 	// When file is uploaded, check for the file type
 	$("#molUpload").change( () => {
 		var uploadFile = document.getElementById("molUpload").files[0];
-		// check if the file is a .mol
+		// check if the file is a .mol ***OR A .pdb***
+		// TODO: store mol/pdb file type in firebase to render them differently
+		// perhaps display molecules and proteins in separate tables?
 		if (uploadFile.name.substring(uploadFile.name.length - 4) == ".mol" || uploadFile.name.substring(uploadFile.name.length - 4) == ".pdb") {
 			$("#molUploadLabel").html(uploadFile.name); // hange the file uploader to include the file name
 			document.getElementById("molUploadButton").disabled = false; // take the "disabled" property off of the upload button

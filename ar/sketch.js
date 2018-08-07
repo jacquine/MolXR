@@ -1,7 +1,7 @@
 var threeSceneReference;
 var GLmolLoader;
 var molecule;
-var rotationSpeed = 0.3;
+var rotationSpeed = 0.3; //this is the STARTING speed multiplier for the molecule
 
 function setup() {
 	
@@ -11,7 +11,7 @@ function setup() {
 
 function draw() {
 	if (molecule) {
-		molecule.rotation.z += (rotationSpeed*0.0085);
+		molecule.rotation.z += (rotationSpeed * 0.0085); //multiply the speed rate by 0.0085, to prevent excessive spinning
 	}
 }
 
@@ -51,11 +51,13 @@ $(document).ready(function() {
 		var data = snapshot.child("data").val();
 		$("title").html(`AR - ${snapshot.child("name").val()}`);
 
+		//GLmolLoader will be our GLmol instance, created using the data from firebase
 		GLmolLoader = new GLmol(data);
 		renderScene("a-marker", "ball-stick");
 		
 	});
 
+	//this is a method which can be called to re-build the scene. it changes the representation and then moves the "new" molecule into the correct position
 	renderScene = function (target, rep) {
 		GLmolLoader.buildScene(target, rep);
 		threeSceneReference = GLmolLoader.scene;
