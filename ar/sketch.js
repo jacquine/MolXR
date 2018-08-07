@@ -1,16 +1,17 @@
 var threeSceneReference;
 var GLmolLoader;
 var molecule;
+var rotationSpeed = 0.3;
 
 function setup() {
 	
+	noCanvas();
+
 }
 
 function draw() {
 	if (molecule) {
-		// molecule.rotation.x += 0.002;
-		// molecule.rotation.y += 0.003;
-		molecule.rotation.z += 0.0035;
+		molecule.rotation.z += (rotationSpeed*0.0085);
 	}
 }
 

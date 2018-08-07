@@ -1,6 +1,7 @@
 var GLmolLoader;
 var molecule;
 var data;
+var rotationSpeed = 0.3;
 
 function setup() {
 	
@@ -9,7 +10,9 @@ function setup() {
 }
 
 function draw() {
-
+	if (molecule) {
+		molecule.rotation.y += (rotationSpeed*0.0085);
+	}
 }
 
 $(document).ready(function() {
@@ -47,7 +50,7 @@ $(document).ready(function() {
 		$("title").html(`VR - ${snapshot.child("name").val()}`);
 
 		GLmolLoader = new GLmol(data);
-		renderScene("#VRScene", "spheres");
+		renderScene("#VRScene", "ball-stick");
 	});
 
 	renderScene = function(target, rep) {
