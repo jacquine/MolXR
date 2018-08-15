@@ -1,100 +1,71 @@
-var loader;
-var rotationSpeed = 0.005;
+// this "name" properties in this array of molecules will build out the demo
+var molecules = [
+	{
+		"name": "test",
+	},
+	{
+		"name": "caffeine",
+	},
+	{
+		"name": "oxycontin",
+	},
+	{
+		"name": "hydrocortisone",
+	},
+];
 
-var oxycontinMarker;
-var caffeineMarker = "Hello World";
-var hydrocortisoneMarker;
-
-var oxycontinMol;
-var caffeineMol;
-var hydrocortisoneMol;
-
-var molecule;
+var rotationSpeed = 0.3;
 
 function setup() {
-
+	noCanvas();
 }
 
 function draw() {
-	if (oxycontinMol) {
-		oxycontinMol.rotation.z += rotationSpeed;
-	}
-	if (caffeineMol) {
-		caffeineMol.rotation.z += rotationSpeed;
-	}
-	if (hydrocortisoneMol) {
-		hydrocortisoneMol.rotation.z += rotationSpeed;
-	}
+	// iterate through each molecule and if the model has been built already, rotate the molecule by the specified amount
+	$.each(molecules, (i, mol) => {
+		if (mol.model) {
+			mol.model.rotation.z += (rotationSpeed * 0.0085);
+		}
+	});
 }
 
 $(document).ready(function() {
-	
-	// get/create the markers for each molecule
-	oxycontinMarker = document.querySelector('#oxycontin-marker').object3D;
-	caffeineMarker = document.querySelector('#caffeine-marker').object3D;
-	hydrocortisoneMarker = document.querySelector('#hydrocortisone-marker').object3D;
 
-	loader = new THREE.MOLLoader();
-	// loader.load("models/molecule.mol", (model) => {
-	// 	threeSceneReference.add(model);
-	// });
+	// for each molecule in the molecules array (the array of names built at the top of this file), build out the molecules model onto its individual marker
+	$.each(molecules, (i, mol) => {
+		console.log(mol);
 
-	//create a plane to add to each marker
-	var geo = new THREE.PlaneGeometry(1.25, 1.25, 1.25);
-	var mat = new THREE.MeshBasicMaterial({
-		color: 0x000000,
-		side: THREE.DoubleSide,
-		opacity: 0.9
+		$("a-scene").append(`<a-marker id="${mol.name}_marker" preset="custom" url="markers/${mol.name}.patt"></a-marker>`); // append the a-marker to the a-scene with the appropriate pattern/ID
+
+		// get the .mol model data
+		$.get(`models/${mol.name}.mol`, (data) => {
+			mol.glmol = new GLmol(data); // create a glmol object WITHIN the molecule object
+
+			renderScene(mol, "ball-stick"); // render the scene, passing the molecule object as well as the desired representation
+		});
 	});
-	var plane = new THREE.Mesh(geo, mat);
-	plane.rotateX(-Math.PI / 2);
 
-	//add the plane to each marker (note the glitchy multiple-plane thing)
-	oxycontinMarker.add(plane);
-	var plane = new THREE.Mesh(geo, mat);
-	plane.rotateX(-Math.PI / 2);
-	caffeineMarker.add(plane);
-	var plane = new THREE.Mesh(geo, mat);
-	plane.rotateX(-Math.PI / 2);
-	hydrocortisoneMarker.add(plane);
+	// this is a method which can be called to re-build the scene. it changes the representation and then moves the "new" molecule into the correct position
+	// this method has been adapted from the normal AR renderScene function, but it uses the molecule object passed into it instead of the scene reference ID
+	// it works the same way, but stores the marker scene, model, and plane as parameters of the molecule object (in the molecule array)
+	renderScene = function (mol, rep) {
+		mol.glmol.buildScene(`#${mol.name}_marker`, rep);
+		mol.marker = mol.glmol.scene;
+		mol.model = mol.glmol.rotationGroup;
+		mol.model.scale.set(0.15, 0.15, 0.15);
+		mol.model.position.set(0, 0.6, 0);
+		mol.model.rotation.set(3.14 / 2, 0, 0);
 
-	//load oxycontin
-	$.get("models/Oxycontin.mol", function(data) {
-		loader.load(data, (model) => {
-			oxycontinMol = model;
-			// rescale and offset the model
-			oxycontinMol.scale.set(0.0018, 0.0018, 0.0018);
-			oxycontinMol.position.set(0, 0.6, 0);
-			oxycontinMol.rotation.set(Math.PI / 2, 0, 0);
-			// add to the marker
-			oxycontinMarker.add(oxycontinMol);
+		var geo = new THREE.PlaneGeometry(1.25, 1.25, 1.25);
+		var mat = new THREE.MeshBasicMaterial({
+			color: 0x000000,
+			side: THREE.DoubleSide,
+			opacity: 0.9
 		});
-	}, "text");
+		mol.plane = new THREE.Mesh(geo, mat);
+		mol.plane.rotateX(-Math.PI / 2);
 
-	//load caffeine
-	$.get("models/Caffeine.mol", function (data) {
-		loader.load(data, (model) => {
-			caffeineMol = model;
-			// rescale and offset the model
-			caffeineMol.scale.set(0.0018, 0.0018, 0.0018);
-			caffeineMol.position.set(0, 0.6, 0);
-			caffeineMol.rotation.set(Math.PI / 2, 0, 0);
-			// add to the marker
-			caffeineMarker.add(caffeineMol);
-		});
-	}, "text");
-
-	//load hydrocortisone
-	$.get("models/Hydrocortisone.mol", function (data) {
-		loader.load(data, (model) => {
-			hydrocortisoneMol = model;
-			// rescale and offset the model
-			hydrocortisoneMol.scale.set(0.0018, 0.0018, 0.0018);
-			hydrocortisoneMol.position.set(0, 0.6, 0);
-			hydrocortisoneMol.rotation.set(Math.PI / 2, 0, 0);
-			// add to the marker
-			hydrocortisoneMarker.add(hydrocortisoneMol);
-		});
-	}, "text");
+		mol.marker.add(mol.plane);
+	}
 	
 });
