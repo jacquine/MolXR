@@ -27,7 +27,7 @@ $(document).ready(function() {
 			$("#page-table table").append('<thead class="thead-light"></thead>');
 			// add the header cells
 			$("#page-table table thead").append('<th scope="col">Molecule</th>');
-			$("#page-table table thead").append('<th scope="col" class="text-right">Options</th>');
+			$("#page-table table thead").append('<th scope="col" class="text-right col">Options</th>');
 			// add the body to the table
 			$("#page-table table").append('<tbody></tbody>')
 			for (var key in data.molecules) {
