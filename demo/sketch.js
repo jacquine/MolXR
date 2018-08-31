@@ -1,19 +1,22 @@
 // this "name" properties in this array of molecules will build out the demo
 var molecules = [
 	{
-		"name": "molxr",
+		name: "molxr",
 	},
 	{
-		"name": "test",
+		name: "test",
 	},
 	{
-		"name": "caffeine",
+		name: "caffeine",
 	},
 	{
-		"name": "oxycontin",
+		name: "oxycontin",
 	},
 	{
-		"name": "hydrocortisone",
+		name: "hydrocortisone",
+	},
+	{
+		name: "penicillin",
 	},
 ];
 
