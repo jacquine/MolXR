@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/./css/main.css">
+
+    <title>MolXR - Help</title>
+
+    <link rel="icon" type="image/x-icon" href="/./favicon.ico">
+    
+    <style>
+        hr {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+    <div class="mb-3">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3">
+            <div class="container">
+                <a class="navbar-brand" href="/.">MolXR</a>
+
+                <ul class="navbar-nav align-center">
+                    <li class="nav-item d-flex align-items-center m-auto"><a href="/./demo" id="class-demo" class="my-2 mb-2 mx-2 my-md-0">Demo</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container pt-4">
+
+            <h1 class="display-3">Help<br></h1>
+            <hr>
+
+            <div id="page-main">
+
+                <h4>Topics</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#signing-in">Signing in</a></li>
+                    <li><a href="#uploading">Uploading a molecule</a></li>
+                    <li><a href="#rename-delete">Renaming & deleting molecules</a></li>
+                    <li><a href="#dash">Sharing your molecules using the dash</a></li>
+                    <li><a href="#view-VR">Viewing a molecule in virtual reality (VR)</a></li>
+                    <li><a href="#view-AR">Viewing a molecule in augmented reality (AR)</a></li>
+                    <li><a href="#view-settings">View settings in VR & AR</a></li>
+                    <li><a href="#classroom-demo">Viewing specific molecules in classroom-demo mode</a></li>
+                </ul>
+                
+                <div id="signing-in">
+                    <hr>
+                    <h4>Signing in</h4>
+                    <p>Sign in using the button in the top-right corner of the <a href="/.">MolXR homepage</a>.</p>
+                    <p>A window will appear asking you to sign in using a Google Account. If you are already signed into at least one Google Account in your browser, you will not need to enter your password again.</p>
+                    <p>NYU students can use their NYU email accounts to sign in with Google.</p>
+                </div>
+                
+                <div id="uploading">
+                    <hr>
+                    <h4>Uploading a molecule</h4>
+                    <p>Currently, MolXR only supports uploading .mol files to view in augmented & virtual reality. This is a standardized file format for storing molecular structure data.</p>
+                    <p>Files in this format can be found on many sites, including <a href="http://molview.org/">MolView</a>. To download a .mol file from MolView, open up the molecule you want to download in the viewer, then click the <strong>Tools</strong> menu and select <strong><i class="fas fa-download"></i> MOL file</strong>.</p>
+                    <p>Once logged into the <a href="/.">homepage</a>, click the big blue <button class="btn btn-primary">Upload</button> button to upload a .mol file.</p>
+                    <p>In the window that pops up, click on <strong>Choose a .mol file</strong> to select the file from a folder on your computer. Then, hit <strong>Upload</strong> again to add the molecule to your account.</p>
+                    <p>You can view the molecules saved in your account on your homescreen.</p>
+                </div>
+                
+                <div id="rename-delete">
+                    <hr>
+                    <h4>Renaming & deleting molecules</h4>
+                    <p>To rename a molecule saved in your account, click on the <i class="far fa-edit"></i> icon beside the molecule you want to rename. Then, type the new name you would like into the window that pops up, and press <strong>Rename</strong> to rename the molecule.</p>
+                    <p>To delete a molecule saved in your account, click on the <i class="far fa-trash-alt"></i> icon beside the molecule you want to delete. This <em>cannot</em> be undone, and there is <em>no</em> confirmation dialogue when deleting molecules.</p>
+                    
+                    <style>
+                        #rename-delete i {
+                            color: #666;
+	                        transition: 0.5s;
+                        }
+                        #rename-delete i:hover {
+                            color: #333;
+                            cursor: pointer;
+                        }
+                    </style>
+                </div>
+                
+                <div id="dash">
+                    <hr>
+                    <h4>Sharing your molecules using the dash</h4>
+                    <p>To share the collection of molecules stored in your account, click on the <strong>Dash</strong> button in the top-right corner of the homepage.</p>
+                    <p>This will take you to your read-only dash. You can copy the address of this page to share your collection of molecules with others. Users viewing your dash do <em>not</em> need to be signed in to view the molecules stored in your account in augmented & virtual reality. Users viewing your dash cannot rename or delete the molecules stored in your account.</p>
+                </div>
+                
+                <div id="view-VR">
+                    <hr>
+                    <h4>Viewing a molecule in virtual reality (VR)</h4>
+                    <p>Viewing molecules in VR requires a mobile device, and a mobile VR headset, such as the <a href="https://vr.google.com/cardboard/">Google Cardboard</a>.</p>
+                    <p>To view a molecule in virtual reality (VR), click on the <button class="btn btn-outline-dark mx-1">VR</button> button beside the molecule you'd like to view, on either the homepage or a user dash. Then, press the VR goggles button in the bottom-right corner of the screen before inserting your phone into the headset.</p>
+                    <p>You can adjust various <a href="#view-settings">settings</a> for viewing molecules in VR as well.</p>
+                    <p>Molecules in VR can be shared by copying the URL of the page viewing the molecule. Users viewing the molecule at this page do not need to be logged in to view the molecule in VR. For example, click <a href="/./vr/?mol=-LHOpBkZyETq0K5p6MYg">here</a> to view Caffeine in VR.</p>
+                </div>
+                
+                <div id="view-AR">
+                    <hr>
+                    <h4>Viewing a molecule in augmented reality (AR)</h4>
+                    <p>Viewing molecules in AR requires a device with a camera, and a copy of the <a href="/./ar/markers/molxr_marker.pdf" download>MolXR Augmented Reality Marker</a>.</p>
+                    <p>To view a molecule in augmented reality (AR), click on the <button class="btn btn-outline-dark mx-1">AR</button> button beside the molecule you'd like to view, on either the homepage or a user dash. If you are prompted to give <strong>Camera Permissions</strong> to this website, you must press <strong>Allow</strong>.</p>
+                    <p>Once the camera view has opened, you can point your camera at the <a href="/./ar/markers/molxr_marker.pdf" download>AR marker</a> to view the molecule in 3D space.</p>
+                    <p>For best performance, the marker should be visible <strong>completely</strong> to the camera, without obstructions. The marker should also be as flat as possible, with as even lighting as possible.</p>
+                    <p>Some ad-blocking browser extensions cause problems with AR, and do not allow the molecule to load at all. If you're having trouble viewing molecules in AR, try temporarily disabling any ad-blocking browser extensions for our domain. We don't serve ads anyway :)</p>
+                    <p>MolXR's AR mode uses the <em>same</em> marker to view <em>all</em> molecules in AR. This functionality works best if the marker is printed out; displaying the marker on a mobile device may cause problems.</p>
+                    <p>You can adjust various <a href="#view-settings">settings</a> for viewing molecules in VR as well.</p>
+                    <p>Molecules in AR can be shared by copying the URL of the page viewing the molecule. Users viewing the molecule at this page do not need to be logged in to view the molecule in AR. For example, click <a href="/./ar/?mol=-LHOpBkZyETq0K5p6MYg">here</a> to view Caffeine in AR.</p>
+                </div>
+                
+                <div id="view-settings">
+                    <hr>
+                    <h4>View settings in VR & AR</h4>
+                    <p>To change the view settings while viewing a molecule in VR or AR, click on the <button class="btn btn-dark"><i class="fas fa-cog"></i></button> button in the top-left corner.</p>
+                    <p>From the window that pops up, use the dropdown menu to select whether to view the molecule in <a href="https://en.wikipedia.org/wiki/Ball-and-stick_model">ball-and-stick</a> or <a href="https://en.wikipedia.org/wiki/Van_der_Waals_surface">van der Waals Sphere</a> representations.</p>
+                    <p>Use the slider to adjust the rotation speed of the molecule.</p>
+                    <p>When you are finished adjusting these settings, click outside the popup window to return to the molecule view.</p>
+                </div>
+                
+                <div id="classroom-demo">
+                    <hr>
+                    <h4>Viewing specific molecules in classroom-demo mode</h4>
+                    <p>Click on the <a href="/./demo">Demo</a> button in the top-right of the homepage to view the Classroom-Demo mode.</p>
+                    <p>Classroom-Demo mode is a modified Augmented Reality viewing-mode designed to allow students to view specific molecules in AR by pointing their camera at specific markers based on molecular structures.</p>
+                    <p>For example, if a professor displays an AR marker including the chemical structure of Penicillin on the board, students can point their camera at the marker and Classroom-Demo mode will allow them to view that molecule's structure in AR.</p>
+                    <p>Classroom-Demo mode does <em>not</em> work with the normal MolXR AR Marker.</p>
+                    <p>Some ad-blocking browser extensions cause problems with AR, and do not allow molecules to load at all. If you're having trouble viewing molecules in AR using Classroom-Demo mode, try temporarily disabling any ad-blocking browser extensions for our domain. We don't serve ads anyway :)</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <footer class="footer row mx-0">
+        <div class="col-12 text-center pb-1 pt-3 d-flex d-sm-block">
+            <a href="/." class="col px-sm-4 mx-sm-1">Home</a>
+            <a href="/./help" class="col px-sm-4 mx-sm-1">Help</a>
+            <a href="https://github.com/willmonahan/MolXR" class="col px-sm-4 mx-sm-1">GitHub</a>
+            
+        </div>
+    
+        <div class="col-12 text-center pb-3 pt-1">
+            <small class="text-muted">Created by <a href="https://as.nyu.edu/content/nyu-as/as/faculty/trace-jordan.html">Trace Jordan</a>, <a href="https://cims.nyu.edu/~kapp/">Craig Kapp</a>, & <a href="https://wmonahan.com/">Will Monahan</a> @ NYU<br>MolXR 2018</small>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+
+</html>
