@@ -18,35 +18,50 @@
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3">
-        <div class="container">
-            <a class="navbar-brand" href="/.">MolXR</a>
+<body class="d-flex flex-column justify-content-between">
+    <div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3">
+            <div class="container">
+                <a class="navbar-brand" href="/.">MolXR</a>
 
-            <ul class="navbar-nav align-center">
-                <li class="nav-item d-flex align-items-center m-auto"><a href="../demo" id="class-demo" class="my-2 mb-2 mx-2 my-md-0">Demo</a></li>
-            </ul>
-        </div>
-    </nav>
+                <ul class="navbar-nav align-center">
+                    <li class="nav-item d-flex align-items-center m-auto"><a href="/./demo" id="class-demo" class="my-2 mb-2 mx-2 my-md-0">Demo</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <div class="container pt-4">
+        <div class="container pt-4">
 
-        <h1 class="display-3">MolXR<br></h1>
-        <h2><small class="text-muted">Molecular Visualization in Virtual & Augmented Reality</small></h2>
-        <hr>
-
-        <div id="page-main">
-
-            <p class="mt-3">To view a molecule in augmented reality, point your device's camera at <a href="../ar/markers/molxr_marker.pdf" download>this marker</a>.</p>
-
+            <h1 class="display-3">MolXR<br></h1>
+            <h2><small class="text-muted">Molecular Visualization in Virtual & Augmented Reality</small></h2>
             <hr>
 
-            <div id="page-table">
+            <div id="page-main">
 
+                <p class="mt-3">To view a molecule in augmented reality, point your device's camera at <a href="/./ar/markers/molxr_marker.pdf" download>this marker</a>.</p>
+
+                <hr>
+
+                <div id="page-table">
+
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
+    
+    <footer class="footer row mx-0">
+        <div class="col-12 text-center pb-1 pt-3 d-flex d-sm-block">
+            <a href="/." class="col px-sm-4 mx-sm-1">Home</a>
+            <a href="/./help" class="col px-sm-4 mx-sm-1">Help</a>
+            <a href="https://github.com/willmonahan/MolXR" class="col px-sm-4 mx-sm-1">GitHub</a>
+            
+        </div>
+    
+        <div class="col-12 text-center pb-3 pt-1">
+            <small class="text-muted">Created by <a href="https://as.nyu.edu/content/nyu-as/as/faculty/trace-jordan.html">Trace Jordan</a>, <a href="https://cims.nyu.edu/~kapp/">Craig Kapp</a>, & <a href="https://wmonahan.com/">Will Monahan</a> @ NYU<br>MolXR 2018</small>
+        </div>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

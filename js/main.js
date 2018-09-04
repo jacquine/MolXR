@@ -36,11 +36,11 @@ $(document).ready(function() {
 				$(`#${key}`).data("key",key);
 				
 				// add the name of the molecule as the primary part of the table
-				$(`#page-table table tbody #${key}`).append(`<th scope="row" class="align-middle">${data.molecules[key].name}</th>`);
+				$(`#page-table table tbody #${key}`).append(`<th scope="row" class="align-middle col">${data.molecules[key].name}</th>`);
 				// everything else, which gets added to the right side of the table, will need to be functional
 
 				// write the key (temporary)
-				$(`#page-table table tbody #${key}`).append(`<td class="text-right"></td>`);
+				$(`#page-table table tbody #${key}`).append(`<td class="text-right col text-nowrap align-middle"</td>`);
 				//add edit button
 				$(`#page-table table tbody #${key} td`).append(`<a href="#" class="mx-2 mol-edit"><i class="far fa-edit"></i></a>`);
 				// add delete button
