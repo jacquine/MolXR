@@ -21,6 +21,7 @@ var molecules = [
 ];
 
 var rotationSpeed = 0.3;
+var rotationRatio = 0.02;
 
 function setup() {
 	noCanvas();
@@ -30,7 +31,7 @@ function draw() {
 	// iterate through each molecule and if the model has been built already, rotate the molecule by the specified amount
 	$.each(molecules, (i, mol) => {
 		if (mol.model) {
-			mol.model.rotation.z += (rotationSpeed * 0.0085);
+			mol.model.rotation.z += (rotationSpeed * rotationRatio);
 		}
 	});
 }
