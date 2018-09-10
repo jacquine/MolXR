@@ -18,6 +18,9 @@ var molecules = [
 	{
 		name: "penicillin",
 	},
+	{
+		name: "ethanol",
+	},
 ];
 
 var rotationSpeed = 0.3;
