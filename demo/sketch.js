@@ -21,6 +21,18 @@ var molecules = [
 	{
 		name: "ethanol",
 	},
+	{
+		name: "water",
+	},
+	{
+		name: "methane",
+	},
+	{
+		name: "ammonia",
+	},
+	{
+		name: "carbon_dioxide",
+	},
 ];
 
 var rotationSpeed = 0.3;
