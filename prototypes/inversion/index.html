@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>HTML Webcame Inversion Demo</title>
+    </head>
+    
+    <body>
+        
+        <video id="video" width="640" height="480" autoplay></video>
+        
+        
+        <script type="text/javascript">
+            window.onload = function () {
+                document.querySelector("video");
+                console.log(video);
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+                if (navigator.getUserMedia) {
+                    navigator.getUserMedia({
+                        video: true,
+                        inverse: true
+                    },
+                        handleVideo, videoError);
+                }
+
+                function handleVideo(stream) {
+                    video.src = window.URL.createObjectURL(stream);
+                }
+
+                function videoError(e) {
+                    // do something
+                }
+
+            }; 
+        </script>
+    </body>
+</html>
