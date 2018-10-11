@@ -33,6 +33,15 @@ var molecules = [
 	{
 		name: "carbon_dioxide",
 	},
+	{
+		name: "n-pentane",
+	},
+	{
+		name: "two-methylbutane",
+	},
+	{
+		name: "two-two-dimethylpropane",
+	},
 ];
 
 var rotationSpeed = 0.3;
@@ -89,5 +98,5 @@ $(document).ready(function() {
 
 		mol.marker.add(mol.plane);
 	}
-	
+
 });
