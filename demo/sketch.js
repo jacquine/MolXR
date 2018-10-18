@@ -1,26 +1,26 @@
 // this "name" properties in this array of molecules will build out the demo
 var molecules = [
-	// {
-	// 	name: "molxr",
-	// },
-	// {
-	// 	name: "test",
-	// },
-	// {
-	// 	name: "caffeine",
-	// },
-	// {
-	// 	name: "oxycontin",
-	// },
-	// {
-	// 	name: "hydrocortisone",
-	// },
-	// {
-	// 	name: "penicillin",
-	// },
-	// {
-	// 	name: "ethanol",
-	// },
+	{
+		name: "molxr",
+	},
+	{
+		name: "test",
+	},
+	{
+		name: "caffeine",
+	},
+	{
+		name: "oxycontin",
+	},
+	{
+		name: "hydrocortisone",
+	},
+	{
+		name: "penicillin",
+	},
+	{
+		name: "ethanol",
+	},
 	{
 		name: "water",
 	},
@@ -54,6 +54,24 @@ function setup() {
 function draw() {
 	// iterate through each molecule and if the model has been built already, rotate the molecule by the specified amount
 	$.each(molecules, (i, mol) => {
+		// if the marker hasn't been seen yet, then load the molecule
+		if (mol.marker.object3D && mol.marker.object3D.visible  && !mol.seen) {
+			// use the viewCount to make sure the marker is consistantly viewed for 10 frames
+			if (mol.viewCount < 10) {
+				mol.viewCount++;
+				// console.log(mol.viewCount);
+			} else {
+							mol.seen = true;
+							console.log(`lazy-loading molecule ${mol.name}.mol`);
+							$.get(`models/${mol.name}.mol`, (data) => {
+								mol.glmol = new GLmol(data); // create a glmol object WITHIN the molecule object
+
+								renderScene(mol, "ball-stick"); // render the scene, passing the molecule object as well as the desired representation
+							});
+			}
+		}
+		
+		// if the model exists
 		if (mol.model) {
 			mol.model.rotation.z += (rotationSpeed * rotationRatio);
 		}
@@ -64,16 +82,21 @@ $(document).ready(function() {
 
 	// for each molecule in the molecules array (the array of names built at the top of this file), build out the molecules model onto its individual marker
 	$.each(molecules, (i, mol) => {
-		console.log(mol);
+		//console.log(mol);
 
 		$("a-scene").append(`<a-marker id="${mol.name}_marker" preset="custom" url="markers/${mol.name}.patt"></a-marker>`); // append the a-marker to the a-scene with the appropriate pattern/ID
+		
+		mol.marker = document.getElementById(`${mol.name}_marker`);
+		mol.viewCount = 0;
+		mol.seen = false;
 
+		/* 
 		// get the .mol model data
 		$.get(`models/${mol.name}.mol`, (data) => {
 			mol.glmol = new GLmol(data); // create a glmol object WITHIN the molecule object
 
 			renderScene(mol, "ball-stick"); // render the scene, passing the molecule object as well as the desired representation
-		});
+		}); */
 	});
 
 	// this is a method which can be called to re-build the scene. it changes the representation and then moves the "new" molecule into the correct position
