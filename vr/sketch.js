@@ -58,7 +58,7 @@ $(document).ready(function() {
 	renderScene = function(target, rep) {
 		GLmolLoader.buildScene(target, rep);
 		molecule = GLmolLoader.rotationGroup;
-		molecule.position.z = -10;
+		molecule.position.z = -15;
 		molecule.position.y = 1;
 	}
 });
