@@ -1,80 +1,132 @@
 <!DOCTYPE html>
 <html lang="en-us">
-	<head>
+  <head>
+    <title>VR</title>
 
-		<title>VR</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 
-		<meta charset="UTF-8">
-		<link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <!-- jQuery Slim (for Firebase functionality) -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous"
+    ></script>
 
-		<!-- jQuery Slim (for Firebase functionality) -->
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-			crossorigin="anonymous"></script>
+    <!-- FireBase Script -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
-		<!-- FireBase Script -->
-		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous"
+    />
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-			crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-		 crossorigin="anonymous">
+    <!-- A-Frame ../libraries -->
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="../libraries/aframe_0.8.2.min.js"
+    ></script>
 
-		<!-- P5 ../libraries -->
-		<script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+    <!-- AFrameP5 library -->
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="../libraries/aframep5.js"
+    ></script>
 
-		<!-- A-Frame ../libraries -->
-		<script language="javascript" type="text/javascript" src="../libraries/aframe_0.8.2.min.js"></script>
+    <!-- P5 Sketch -->
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="sketch.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="../libraries/GLmol.js"
+    ></script>
 
-		<!-- AFrameP5 library -->
-		<script language="javascript" type="text/javascript" src="../libraries/aframep5.js"></script>
+    <!-- custom styles -->
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      type="button"
+      class="btn btn-outline-light btn-lg"
+      style="position: absolute; top: 0; left: 0; z-index: 1;"
+      data-toggle="modal"
+      data-target="#settingsModal"
+    >
+      <i class="fas fa-cog"></i>
+    </button>
 
-		<!-- P5 Sketch -->
-		<script language="javascript" type="text/javascript" src="sketch.js"></script>
-		<script language="javascript" type="text/javascript" src="../libraries/GLmol.js"></script>
+    <div
+      class="modal fade"
+      id="settingsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="settingsModalLabel"
+      aria-hidden="true"
+      style="position: absolute;"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p class="lead">Select Viewing Mode:</p>
+            <select
+              onchange="renderScene('#VRScene', this.value)"
+              style="text-align-last: center"
+            >
+              <option value="ball-stick">Ball & Stick Model</option>
+              <option value="spheres">Space-Filling Model</option>
+            </select>
 
-		<!-- custom styles -->
-		<style>
-			body {
-				padding: 0;
-				margin: 0;
-			}
-		</style>
-	</head>
-	<body>
+            <hr />
 
-		<button type="button" class="btn btn-outline-light btn-lg" style="position: absolute; top: 0; left: 0; z-index: 1;" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-cog"></i></button>
+            <p class="lead">Select Rotation Speed:</p>
+            <p id="rotationDisplay">0.30</p>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              value="0.3"
+              step="0.05"
+              oninput="$('#rotationDisplay').html(parseFloat(this.value).toFixed(2)); rotationSpeed = this.value;"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true" style="position: absolute;">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="settingsModalLabel">Settings</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body text-center">
-						<p class="lead">Select Viewing Mode:</p>
-						<select onchange="renderScene('#VRScene', this.value)" style="text-align-last: center">
-							<option value="ball-stick">Ball & Stick Model</option>
-							<option value="spheres">Space-Filling Model</option>
-						</select>
-
-						<hr>
-
-						<p class="lead">Select Rotation Speed:</p>
-						<p id="rotationDisplay">0.30</p>
-						<input type="range" min="0" max="1" value="0.3" step="0.05" oninput="$('#rotationDisplay').html(parseFloat(this.value).toFixed(2)); rotationSpeed = this.value;">
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- container to hold our VR scene - make sure to give this element an ID of 'VRScene' -->
-	    <a-scene id="VRScene">
-
-	    	<!--
+    <!-- container to hold our VR scene - make sure to give this element an ID of 'VRScene' -->
+    <a-scene id="VRScene">
+      <!--
 		       The 'a-assets' container is used to load in any external artwork you may want to use as "textures" for your objects.
 		       Ensure that this element has an ID of 'VRAssets'
 
@@ -87,16 +139,15 @@
 		       <img id="ITEM_ID_GOES_HERE" src="images/gold_block.png">
 			-->
 
-			<a-assets id="VRAssets">
+      <a-assets id="VRAssets"> </a-assets>
 
-			</a-assets>
+      <a-sky color="#000"></a-sky>
+    </a-scene>
 
-			<a-sky color="#000"></a-sky>
-
-		</a-scene>
-
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-			crossorigin="anonymous"></script>
-
-	</body>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

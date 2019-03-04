@@ -1,7 +1,8 @@
 var molecules = [
-    {
-        name: "molxr",
-    },
+  {
+    name: 'molxr',
+  },
+  /*
     {
         name: "test",
     },
@@ -20,18 +21,19 @@ var molecules = [
     {
         name: "ethanol",
     },
-    {
-        name: "water",
-    },
-    {
-        name: "methane",
-    },
+    */ {
+    name: 'water',
+  },
+  {
+    name: 'methane',
+  },
+  /*
     {
         name: "ammonia",
     },
-    {
-        name: "carbon_dioxide",
-    },
+    */ {
+    name: 'carbon_dioxide',
+  } /*
     {
         name: "n-pentane",
     },
@@ -40,5 +42,26 @@ var molecules = [
     },
     {
         name: "two-two-dimethylpropane",
+    }, 
+    {
+        name: "alpha-glucose",
     },
+    {
+        name: "beta-glucose",
+    },
+    {
+        name: "sucrose",
+    },
+    {
+        name: "lactose",
+    },
+    {
+        name: "starch",
+    },*/,
+  {
+    name: 'ozone',
+  },
+  {
+    name: 'chlorofluorocarbon',
+  },
 ];
